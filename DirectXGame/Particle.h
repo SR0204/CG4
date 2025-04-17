@@ -7,13 +7,13 @@ class Particle {
 
 public:
 	// 初期化
-	void Initialize(Model* model);
+	void Initialize(Model* model, Vector3 posistion);
 
 	// 更新
 	void Update();
 
 	// 描画
-	void Draw(Camera&camera);
+	void Draw(Camera& camera);
 
 private:
 	// ワールド変換データ
@@ -22,9 +22,9 @@ private:
 	// モデル
 	Model* model_ = nullptr;
 
-	//色変更オブジェクト
+	// 色変更オブジェクト
 	ObjectColor objectColor_;
 
-	//色の数値
+	// 色の数値
 	Vector4 color_;
 };

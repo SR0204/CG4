@@ -2,7 +2,7 @@
 #include "KamataEngine.h"
 #include "Particle.h"
 
-using namespace KamataEngine;
+// using namespace KamataEngine;
 
 class GameScene {
 
@@ -24,9 +24,9 @@ private:
 	// パーティクル3Dモデルデータ
 	Model* modelParticle_ = nullptr;
 
+	// パーティクル
+	std::list<Particle*> particles_;
+
 	// カメラ
 	Camera camera_;
-
-	// パーティクル
-	Particle* particle_ = nullptr;
 };
