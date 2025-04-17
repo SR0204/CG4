@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include "algorithm"
 
 using namespace MathUtility;
 
@@ -24,6 +25,21 @@ void Particle::Initialize(Model* model, Vector3 posistion, Vector3 velocity) {
 
 void Particle::Update() {
 
+	// 終了なら何もしない
+	if (isFinished_) {
+		return;
+	}
+
+	// カウンターを1フレーム分の秒数を進める
+	counter_ += 1.0f / 60.0f;
+
+	// 存続時間の上限に達したら
+	if (counter_ >= kDuration) {
+		counter_ = kDuration;
+		// 終了扱いにする
+		isFinished_ = true;
+	}
+
 	// 移動
 	worldTransform_.translation_ += {velocity_.x, velocity_.y, velocity_.z};
 
@@ -32,6 +48,9 @@ void Particle::Update() {
 
 	// 色変更オブジェクトに色の数値を設定する
 	objectColor_.SetColor(color_);
+
+	// フェード処理
+	color_.w = std::clamp(1.0f - counter_ / kDuration, 0.0f, 1.0f);
 }
 
 void Particle::Draw(Camera& camera) {
