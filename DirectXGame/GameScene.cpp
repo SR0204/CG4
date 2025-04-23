@@ -9,12 +9,12 @@ GameScene::~GameScene() { delete effect_; }
 void GameScene::Initialize() {
 
 	// 3Dモデルデータの生成
-	modelEffect_ = Model::CreateSphere(2, 4);
+	modelEffect_ = Model::CreateSphere(2, 2);
 
 	// カメラの初期化
 	camera_.Initialize();
 
-	//エフェクト
+	// エフェクト
 	effect_ = new Effect();
 	effect_->Initialize(modelEffect_);
 }
