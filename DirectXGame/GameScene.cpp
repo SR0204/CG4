@@ -4,46 +4,33 @@ using namespace KamataEngine;
 
 GameScene::GameScene() {}
 
-GameScene::~GameScene() {
-
-	// 3Dモデルデータの開放
-	delete modelParticle_;
-
-	// パーティクルの解放
-	delete particle_;
-}
+GameScene::~GameScene() { delete effect_; }
 
 void GameScene::Initialize() {
 
 	// 3Dモデルデータの生成
-	modelParticle_ = Model::CreateSphere(4, 4);
+	modelEffect_ = Model::CreateSphere(2, 4);
 
 	// カメラの初期化
 	camera_.Initialize();
 
-	// パーティクルの生成
-	particle_ = new Particle();
-	// パーティクルの初期化
-	particle_->Initialize(modelParticle_);
+	//エフェクト
+	effect_ = new Effect();
+	effect_->Initialize(modelEffect_);
 }
 
-void GameScene::Update() {
-
-	// パーティクルの更新
-	particle_->Update();
-}
+void GameScene::Update() { effect_->Update(); }
 
 void GameScene::Draw() {
 
-	//DirectXCommonインスタンスの取得
+	// DirectXCommonインスタンスの取得
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 
-	//3Dモデル描画処理前
+	// 3Dモデル描画処理前
 	Model::PreDraw(dxCommon->GetCommandList());
 
-	// パーティクルの描画
-	particle_->Draw(camera_);
+	effect_->Draw(camera_);
 
-	//3Dモデル描画処理後
+	// 3Dモデル描画処理後
 	Model::PostDraw();
 }

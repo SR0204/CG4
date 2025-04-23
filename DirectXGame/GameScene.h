@@ -1,6 +1,6 @@
 #pragma once
 #include "KamataEngine.h"
-#include "Particle.h"
+#include"Effect.h"
 
 using namespace KamataEngine;
 
@@ -21,12 +21,12 @@ public:
 	void Draw();
 
 private:
-	// パーティクル3Dモデルデータ
-	Model* modelParticle_ = nullptr;
+	// エフェクト3Dモデルデータ
+	Model* modelEffect_ = nullptr;
 
 	// カメラ
 	Camera camera_;
 
-	// パーティクル
-	Particle* particle_ = nullptr;
+	//エフェクト
+	Effect* effect_ = nullptr;
 };

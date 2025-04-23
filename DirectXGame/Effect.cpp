@@ -1,6 +1,6 @@
-#include "Particle.h"
+#include "Effect.h"
 
-void Particle::Initialize(Model* model) {
+void Effect::Initialize(Model* model) {
 
 	// NULLポインタチェック
 	// assert(model_);
@@ -10,14 +10,13 @@ void Particle::Initialize(Model* model) {
 	worldTransform_.Initialize();
 }
 
-void Particle::Update() {
+void Effect::Update() {
 
 	// 行列を定数バッファに転送
 	worldTransform_.TransferMatrix();
 }
 
-void Particle::Draw(Camera& camera) {
-
+void Effect::Draw(Camera& camera) {
 	// 3Dモデルを描画
 	model_->Draw(worldTransform_, camera);
 }
