@@ -11,7 +11,7 @@ void Effect::Initialize(Model* model) {
 }
 
 void Effect::Update() {
-
+	
 	// 行列を定数バッファに転送
 	worldTransform_.TransferMatrix();
 }
