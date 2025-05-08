@@ -6,7 +6,7 @@ using namespace KamataEngine;
 class Effect {
 
 public:
-	void Initialize(Model*model);
+	void Initialize(Model* model, Vector3 rotation, Vector3 velocity);
 
 	void Update();
 
@@ -20,4 +20,6 @@ private:
 	// モデル
 	Model* model_ = nullptr;
 
+	// 移動量
+	Vector3 velocity_;
 };
