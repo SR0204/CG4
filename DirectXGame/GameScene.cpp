@@ -41,6 +41,7 @@ void GameScene::Initialize() {
 		Normalize(velocity);
 		velocity *= distribution(randomEngine);
 		velocity *= 0.2f;
+
 		// 初期化
 		effect->Initialize(modelEffect_, rotation, velocity);
 		// リストに追加
