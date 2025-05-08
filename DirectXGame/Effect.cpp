@@ -42,6 +42,9 @@ void Effect::Update() {
 	// 回転
 	worldTransform_.rotation_ += {velocity_.x, velocity_.y, 0};
 
+	// 大きさ
+	worldTransform_.scale_ += {0, velocity_.y, velocity_.z};
+
 	// 行列の更新
 	worldTransform_.UpdateMatrix();
 

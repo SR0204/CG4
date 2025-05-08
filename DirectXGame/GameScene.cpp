@@ -85,10 +85,10 @@ void GameScene::EffectBorn(Vector3 position) {
 		// 位置
 		Vector3 rotation = {0.0f, 0.0f, 0.0f};
 		// 移動量
-		Vector3 velocity = {distribution(randomEngine), distribution(randomEngine), 0};
+		Vector3 velocity = {distribution(randomEngine), distribution(randomEngine), distribution(randomEngine)};
 		Normalize(velocity);
 		velocity *= distribution(randomEngine);
-		velocity *= 0.2f;
+		velocity *= 0.3f;
 
 		// 初期化
 		effect->Initialize(modelEffect_, position, rotation, velocity);
