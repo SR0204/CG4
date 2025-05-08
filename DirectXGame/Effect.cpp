@@ -3,7 +3,7 @@
 
 using namespace MathUtility;
 
-void Effect::Initialize(Model* model, Vector3 rotation, Vector3 velocity) {
+void Effect::Initialize(Model* model, Vector3 posistion, Vector3 rotation, Vector3 velocity) {
 
 	// NULLポインタチェック
 	// assert(model_);
@@ -12,7 +12,7 @@ void Effect::Initialize(Model* model, Vector3 rotation, Vector3 velocity) {
 	velocity_ = velocity;
 
 	worldTransform_.Initialize();
-
+	worldTransform_.translation_ = posistion;
 	worldTransform_.rotation_ = rotation;
 	// 大きさ
 	worldTransform_.scale_ = {0.1f, 6.0f, 0.0f};

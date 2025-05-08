@@ -6,7 +6,7 @@ using namespace KamataEngine;
 class Effect {
 
 public:
-	void Initialize(Model* model, Vector3 rotation, Vector3 velocity);
+	void Initialize(Model* model, Vector3 posistion, Vector3 rotation, Vector3 velocity);
 
 	void Update();
 

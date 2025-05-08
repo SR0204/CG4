@@ -20,6 +20,9 @@ public:
 	// 描画
 	void Draw();
 
+	//エフェクト発生
+	void EffectBorn(Vector3 position);
+
 private:
 	// エフェクト3Dモデルデータ
 	Model* modelEffect_ = nullptr;

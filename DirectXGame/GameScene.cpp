@@ -29,27 +29,20 @@ void GameScene::Initialize() {
 	// カメラの初期化
 	camera_.Initialize();
 
-	// エフェクト
-	for (int i = 0; i < 10; i++) {
-
-		// 生成
-		Effect* effect = new Effect();
-		// 位置
-		Vector3 rotation = {0.0f, 0.0f, 0.0f};
-		// 移動量
-		Vector3 velocity = {distribution(randomEngine), distribution(randomEngine), 0};
-		Normalize(velocity);
-		velocity *= distribution(randomEngine);
-		velocity *= 0.2f;
-
-		// 初期化
-		effect->Initialize(modelEffect_, rotation, velocity);
-		// リストに追加
-		effects_.push_back(effect);
-	}
+	// 乱数の初期化
+	srand((unsigned)time(NULL));
 }
 
 void GameScene::Update() {
+
+	// 発生位置は乱数
+	Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
+
+	// 確率で発生する
+	if (rand() % 20 == 0) {
+		// パーティクル発生初期化
+		EffectBorn(position);
+	}
 
 	// エフェクトの更新
 	for (Effect* effect : effects_) {
@@ -81,4 +74,25 @@ void GameScene::Draw() {
 
 	// 3Dモデル描画処理後
 	Model::PostDraw();
+}
+
+void GameScene::EffectBorn(Vector3 position) {
+	// エフェクト
+	for (int i = 0; i < 10; i++) {
+
+		// 生成
+		Effect* effect = new Effect();
+		// 位置
+		Vector3 rotation = {0.0f, 0.0f, 0.0f};
+		// 移動量
+		Vector3 velocity = {distribution(randomEngine), distribution(randomEngine), 0};
+		Normalize(velocity);
+		velocity *= distribution(randomEngine);
+		velocity *= 0.2f;
+
+		// 初期化
+		effect->Initialize(modelEffect_, position, rotation, velocity);
+		// リストに追加
+		effects_.push_back(effect);
+	}
 }
