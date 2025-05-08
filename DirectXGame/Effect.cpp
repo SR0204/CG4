@@ -1,6 +1,7 @@
 #include "Effect.h"
 #include "algorithm"
 
+using namespace KamataEngine;
 using namespace MathUtility;
 
 void Effect::Initialize(Model* model, Vector3 posistion, Vector3 rotation, Vector3 velocity) {

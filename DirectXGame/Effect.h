@@ -1,35 +1,33 @@
 #pragma once
 #include "KamataEngine.h"
 
-using namespace KamataEngine;
-
 class Effect {
 
 public:
-	void Initialize(Model* model, Vector3 posistion, Vector3 rotation, Vector3 velocity);
+	void Initialize(KamataEngine::Model* model, KamataEngine::Vector3 posistion, KamataEngine::Vector3 rotation, KamataEngine::Vector3 velocity);
 
 	void Update();
 
-	void Draw(Camera& camera);
+	void Draw(KamataEngine::Camera& camera);
 
 	// デスフラグのgetter
 	bool IsFinished() { return isFinished_; }
 
 private:
 	// ワールド変換データ
-	WorldTransform worldTransform_;
+	KamataEngine::WorldTransform worldTransform_;
 
 	// モデル
-	Model* model_ = nullptr;
+	KamataEngine::Model* model_ = nullptr;
 
 	// 移動量
-	Vector3 velocity_;
+	KamataEngine::Vector3 velocity_;
 
 	// 色変更オブジェクト
-	ObjectColor objectColor_;
+	KamataEngine::ObjectColor objectColor_;
 
 	// 色の数値
-	Vector4 color_;
+	KamataEngine::Vector4 color_;
 
 	// 終了フラグ
 	bool isFinished_ = false;

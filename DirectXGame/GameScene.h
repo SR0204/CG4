@@ -2,7 +2,6 @@
 #include "KamataEngine.h"
 #include"Effect.h"
 
-using namespace KamataEngine;
 
 class GameScene {
 
@@ -21,14 +20,14 @@ public:
 	void Draw();
 
 	//エフェクト発生
-	void EffectBorn(Vector3 position);
+	void EffectBorn(KamataEngine::Vector3 position);
 
 private:
 	// エフェクト3Dモデルデータ
-	Model* modelEffect_ = nullptr;
+	KamataEngine::Model* modelEffect_ = nullptr;
 
 	// カメラ
-	Camera camera_;
+	KamataEngine::Camera camera_;
 
 	//エフェクト
 	std::list<Effect*> effects_;
