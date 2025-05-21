@@ -36,6 +36,15 @@ void GameScene::Initialize() {
 
 void GameScene::Update() {
 
+	// 終了フラグの立ったパーティクルを削除
+	particles_.remove_if([](Particle* particle) {
+		if (particle->IsFinished()) {
+			delete particle;
+			return true;
+		}
+		return false;
+	});
+
 	// 発生位置は乱数
 	Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
 
@@ -49,15 +58,6 @@ void GameScene::Update() {
 	for (Particle* particle : particles_) {
 		particle->Update();
 	}
-
-	// 終了フラグの立ったパーティクルを削除
-	particles_.remove_if([](Particle* particle) {
-		if (particle->IsFinished()) {
-			delete particle;
-			return true;
-		}
-		return false;
-	});
 }
 
 void GameScene::Draw() {
