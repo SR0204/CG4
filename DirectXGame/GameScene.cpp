@@ -2,11 +2,7 @@
 
 using namespace KamataEngine;
 
-GameScene::~GameScene() {
-
-	Model2::StaticFinalize();
-
-}
+GameScene::~GameScene() { Model2::StaticFinalize(); }
 
 void GameScene::Initialize() {
 
@@ -21,15 +17,13 @@ void GameScene::Initialize() {
 	worldTransform_->Initialize();
 
 	// モデル2
-	model_ = new Model2();
+
 	Model2::StaticInitialize();
-	model_->CreateFromOBJ("cube", true);
-
+	textureHandle_ = TextureManager::Load("./Resources/uvChecker.png");
+	model_ = Model2::CreateFromOBJ("cube", true);
 }
 
-void GameScene::Update() {
-	
-}
+void GameScene::Update() {}
 
 void GameScene::Draw() {
 
@@ -57,7 +51,9 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-	model_->Draw(worldTransform_, camera_);
+
+	model_->Draw(*worldTransform_, *camera_, textureHandle_);
+
 	// 3Dオブジェクト描画後処理
 	Model2::PostDraw();
 #pragma endregion
