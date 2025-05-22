@@ -17,7 +17,6 @@ void GameScene::Initialize() {
 	worldTransform_->Initialize();
 
 	// モデル2
-
 	Model2::StaticInitialize();
 	textureHandle_ = TextureManager::Load("./Resources/uvChecker.png");
 	model_ = Model2::CreateFromOBJ("cube", true);
