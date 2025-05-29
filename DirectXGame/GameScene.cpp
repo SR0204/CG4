@@ -13,8 +13,11 @@ void GameScene::Initialize() {
 	camera_ = new Camera();
 	camera_->Initialize();
 
-	worldTransform_ = new WorldTransform();
-	worldTransform_->Initialize();
+	for (int i = 0; i < 5; i++) {
+		worldTransform_ = new WorldTransform();
+		worldTransform_->Initialize();
+		worldTransform_->translation_ = {i * 12.0f, 0.0f, 0.0f};
+	}
 
 	// モデル2
 	Model2::StaticInitialize();
@@ -50,8 +53,9 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-
-	model_->Draw(*worldTransform_, *camera_, textureHandle_);
+	for (int i = 0; i < 5; i++) {
+		model_->Draw(*worldTransform_, *camera_, textureHandle_);
+	}
 
 	// 3Dオブジェクト描画後処理
 	Model2::PostDraw();
