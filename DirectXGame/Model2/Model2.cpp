@@ -147,7 +147,7 @@ Model2* Model2::CreateSquare() {
 	indeces.resize(kNumIndices);
 
 	// 左下
-	vertices[0].pos = {0.5f, 360.0f, 0.0f};
+	vertices[0].pos = {0.0f, 360.0f, 0.0f};
 	vertices[0].uv = {0.0f, 1.0f};
 	vertices[0].normal = {0.0f, 0.0f, 1.0f};
 
