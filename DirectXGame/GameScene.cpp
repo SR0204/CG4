@@ -19,7 +19,7 @@ void GameScene::Initialize() {
 	// モデル2
 	Model2::StaticInitialize();
 	textureHandle_ = TextureManager::Load("./Resources/uvChecker.png");
-	model_ = Model2::CreateFromOBJ("cube", true);
+	model_ = Model2::CreateSquare();
 }
 
 void GameScene::Update() {}
