@@ -25,7 +25,7 @@ private:
 	KamataEngine::Model2* model_ = nullptr;
 	uint32_t textureHandle_;
 
-	KamataEngine::WorldTransform* worldTransform_;
+	std::vector<KamataEngine::WorldTransform*> worldTransforms_;
 
 	// カメラ
 	KamataEngine::Camera* camera_;

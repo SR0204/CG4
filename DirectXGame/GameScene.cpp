@@ -2,7 +2,13 @@
 
 using namespace KamataEngine;
 
-GameScene::~GameScene() { Model2::StaticFinalize(); }
+GameScene::~GameScene() {
+	for (WorldTransform* wt : worldTransforms_) {
+		delete wt;
+	}
+	worldTransforms_.clear();
+	Model2::StaticFinalize();
+}
 
 void GameScene::Initialize() {
 
@@ -13,15 +19,17 @@ void GameScene::Initialize() {
 	camera_ = new Camera();
 	camera_->Initialize();
 
-	// モデル2
 	for (int i = 0; i < 5; i++) {
-		worldTransform_ = new WorldTransform();
-		worldTransform_->Initialize();
-		worldTransform_->translation_ = {i * 5.0f, 0.0f, 0.0f};
-		Model2::StaticInitialize();
-		textureHandle_ = TextureManager::Load("./Resources/uvChecker.png");
-		model_ = Model2::CreateSquare();
+		WorldTransform* wt = new WorldTransform();
+		wt->Initialize();
+		wt->translation_ = {i * 5.0f, 0.0f, 0.0f};
+		worldTransforms_.push_back(wt);
 	}
+
+	// モデル2
+	Model2::StaticInitialize();
+	textureHandle_ = TextureManager::Load("./Resources/uvChecker.png");
+	model_ = Model2::CreateSquare();
 }
 
 void GameScene::Update() {}
@@ -52,8 +60,8 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-	for (int i = 0; i < 5; i++) {
-		model_->Draw(*worldTransform_, *camera_, textureHandle_);
+	for (WorldTransform* wt : worldTransforms_) {
+		model_->Draw(*wt, *camera_, textureHandle_);
 	}
 
 	// 3Dオブジェクト描画後処理
