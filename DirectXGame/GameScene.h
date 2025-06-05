@@ -2,7 +2,6 @@
 #include "KamataEngine.h"
 #include "Model2/Model2.h"
 
-
 class GameScene {
 
 public:
@@ -18,17 +17,16 @@ public:
 	void Draw();
 
 private:
-
 	KamataEngine::DirectXCommon* dxCommon_ = nullptr;
 	KamataEngine::Input* input_ = nullptr;
 	KamataEngine::Audio* audio_ = nullptr;
 
-	//モデル
+	// モデル
 	KamataEngine::Model2* model_ = nullptr;
 	uint32_t textureHandle_;
 
 	KamataEngine::WorldTransform* worldTransform_;
 
-	//カメラ
+	// カメラ
 	KamataEngine::Camera* camera_;
 };

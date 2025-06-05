@@ -13,16 +13,15 @@ void GameScene::Initialize() {
 	camera_ = new Camera();
 	camera_->Initialize();
 
+	// モデル2
 	for (int i = 0; i < 5; i++) {
 		worldTransform_ = new WorldTransform();
 		worldTransform_->Initialize();
-		worldTransform_->translation_ = {i * 12.0f, 0.0f, 0.0f};
+		worldTransform_->translation_ = {i * 5.0f, 0.0f, 0.0f};
+		Model2::StaticInitialize();
+		textureHandle_ = TextureManager::Load("./Resources/uvChecker.png");
+		model_ = Model2::CreateSquare();
 	}
-
-	// モデル2
-	Model2::StaticInitialize();
-	textureHandle_ = TextureManager::Load("./Resources/uvChecker.png");
-	model_ = Model2::CreateSquare();
 }
 
 void GameScene::Update() {}
