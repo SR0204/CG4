@@ -29,7 +29,7 @@ void GameScene::Initialize() {
 	// モデル2
 	Model2::StaticInitialize();
 	textureHandle_ = TextureManager::Load("./Resources/uvChecker.png");
-	model_ = Model2::CreateSquare();
+	model_ = Model2::CreateSquare(5);
 }
 
 void GameScene::Update() {}

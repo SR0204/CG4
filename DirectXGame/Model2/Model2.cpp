@@ -131,7 +131,7 @@ Model2* Model2::CreateSphere(uint32_t divisionVertial, uint32_t divisionHorizont
 	return instance;
 }
 
-Model2* Model2::CreateSquare() {
+Model2* Model2::CreateSquare(int num) {
 
 	// メモリ確保
 	Model2* instance = new Model2;
@@ -157,13 +157,13 @@ Model2* Model2::CreateSquare() {
 	vertices[1].normal = {0.0f, 0.0f, 1.0f};
 
 	// 右下
-	vertices[2].pos = {5.0f, -5.0f, 0.0f};
-	vertices[2].uv = {1.0f, 1.0f};
+	vertices[2].pos = {5.0f * static_cast<float>(num), -5.0f, 0.0f};
+	vertices[2].uv = {1.0f * static_cast<float>(num), 1.0f};
 	vertices[2].normal = {0.0f, 0.0f, 1.0f};
 
 	// 右上
-	vertices[3].pos = {5.0f, 5.0f, 0.0f};
-	vertices[3].uv = {1.0f, 0.0f};
+	vertices[3].pos = {5.0f * static_cast<float>(num), 5.0f, 0.0f};
+	vertices[3].uv = {1.0f * static_cast<float>(num), 0.0f};
 	vertices[3].normal = {0.0f, 0.0f, 1.0f};
 
 	// インデックス
