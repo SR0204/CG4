@@ -142,6 +142,8 @@ public: // 静的メンバ関数
 	/// </summary>
 	static Model2* CreateSquare(int num);
 
+	static Model2* CreateRing();
+
 	/// <summary>
 	/// 描画前処理
 	/// </summary>

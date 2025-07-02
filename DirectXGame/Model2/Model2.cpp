@@ -180,6 +180,58 @@ Model2* Model2::CreateSquare(int num) {
 	return instance;
 }
 
+Model2* Model2::CreateRing() {
+
+	// メモリ確保
+	Model2* instance = new Model2;
+	std::vector<Mesh::VertexPosNormalUv> vertices;
+	std::vector<uint32_t> indeces;
+
+	const uint32_t kRingDivide = 32;
+	const float kOuterRadius = 1.0f;
+	const float kInnerRadius = 0.2f;
+	const float radianPerDivide = 2.0f * std::numbers::pi_v<float> / float(kRingDivide);
+
+	for (uint32_t index = 0; index < kRingDivide; ++index) {
+		float sin = std::sin(index * radianPerDivide);
+		float cos = std::cos(index * radianPerDivide);
+		float sinNext = std::sin((index + 1) * radianPerDivide);
+		float cosNext = std::cos((index + 1) * radianPerDivide);
+		float u = float(index) / float(kRingDivide);
+		float uNext = float(index + 1) / float(kRingDivide);
+		// positionとuv normalは必要なら+zを設定する
+
+		// 左下
+		vertices[0].pos = {-sin * kOuterRadius, cos * kOuterRadius, 0.0f};
+		vertices[0].uv = {u, 0.0f};
+
+		// 左上
+		vertices[1].pos = {-sinNext * kOuterRadius, cosNext * kOuterRadius, 0.0f};
+		vertices[1].uv = {uNext, 0.0f};
+
+		// 右下
+		vertices[2].pos = {-sin * kInnerRadius, cos * kInnerRadius, 0.0f};
+		vertices[2].uv = {u, 0.0f};
+
+		// 右上
+		vertices[3].pos = {-sinNext * kInnerRadius, cosNext * kInnerRadius, 0.0f};
+		vertices[3].uv = {uNext, 0.0f};
+	}
+
+	// インデックス
+	indeces[0] = 0;
+	indeces[1] = 1;
+	indeces[2] = 2;
+
+	indeces[3] = 2;
+	indeces[4] = 1;
+	indeces[5] = 3;
+
+	instance->InitializeFromVertices(vertices, indeces);
+
+	return instance;
+}
+
 void Model2::PreDraw(ID3D12GraphicsCommandList* commandList) { ModelCommon2::GetInstance()->PreDraw(commandList); }
 
 void Model2::PostDraw() { ModelCommon2::GetInstance()->PostDraw(); }
