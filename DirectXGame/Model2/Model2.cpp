@@ -181,53 +181,60 @@ Model2* Model2::CreateSquare(int num) {
 }
 
 Model2* Model2::CreateRing() {
-
 	// メモリ確保
 	Model2* instance = new Model2;
 	std::vector<Mesh::VertexPosNormalUv> vertices;
-	std::vector<uint32_t> indeces;
+	std::vector<uint32_t> indices;
 
 	const uint32_t kRingDivide = 32;
-	const float kOuterRadius = 1.0f;
-	const float kInnerRadius = 0.2f;
-	const float radianPerDivide = 2.0f * std::numbers::pi_v<float> / float(kRingDivide);
+	const float kOuterRadius = 10.0f;
+	const float kInnerRadius = 4.0f;
+	const float ridianPerDivide = 2.0f * std::numbers::pi_v<float> / float(kRingDivide);
+
+	// 頂点数は分割数 * 4
+	vertices.resize(kRingDivide * 4);
+	// インデックス数は分割数 * 6
+	indices.resize(kRingDivide * 6);
 
 	for (uint32_t index = 0; index < kRingDivide; ++index) {
-		float sin = std::sin(index * radianPerDivide);
-		float cos = std::cos(index * radianPerDivide);
-		float sinNext = std::sin((index + 1) * radianPerDivide);
-		float cosNext = std::cos((index + 1) * radianPerDivide);
+		float sin = std::sin(index * ridianPerDivide);
+		float cos = std::cos(index * ridianPerDivide);
+		float sinNext = std::sin((index + 1) * ridianPerDivide);
+		float cosNext = std::cos((index + 1) * ridianPerDivide);
 		float u = float(index) / float(kRingDivide);
 		float uNext = float(index + 1) / float(kRingDivide);
-		// positionとuv normalは必要なら+zを設定する
 
+		// 各分割の最初の頂点のインデックス
+		uint32_t vertexIndex = index * 4;
+		uint32_t indexIndex = index * 6;
+
+		// positionとuv。normalは必要なら+zを設定する
 		// 左下
-		vertices[0].pos = {-sin * kOuterRadius, cos * kOuterRadius, 0.0f};
-		vertices[0].uv = {u, 0.0f};
-
+		vertices[(size_t)vertexIndex + 0].pos = {-sin * kOuterRadius, -cos * kOuterRadius, 0.0f};
+		vertices[(size_t)vertexIndex + 0].normal = {0.0f, 0.0f, 1.0f};
+		vertices[(size_t)vertexIndex + 0].uv = {u, 0.0f};
 		// 左上
-		vertices[1].pos = {-sinNext * kOuterRadius, cosNext * kOuterRadius, 0.0f};
-		vertices[1].uv = {uNext, 0.0f};
-
+		vertices[(size_t)vertexIndex + 1].pos = {-sinNext * kOuterRadius, -cosNext * kOuterRadius, 0.0f};
+		vertices[(size_t)vertexIndex + 1].normal = {0.0f, 0.0f, 1.0f};
+		vertices[(size_t)vertexIndex + 1].uv = {uNext, 0.0f};
 		// 右下
-		vertices[2].pos = {-sin * kInnerRadius, cos * kInnerRadius, 0.0f};
-		vertices[2].uv = {u, 0.0f};
-
+		vertices[(size_t)vertexIndex + 2].pos = {-sin * kInnerRadius, -cos * kInnerRadius, 0.0f};
+		vertices[(size_t)vertexIndex + 2].normal = {0.0f, 0.0f, 1.0f};
+		vertices[(size_t)vertexIndex + 2].uv = {u, 1.0f};
 		// 右上
-		vertices[3].pos = {-sinNext * kInnerRadius, cosNext * kInnerRadius, 0.0f};
-		vertices[3].uv = {uNext, 0.0f};
+		vertices[(size_t)vertexIndex + 3].pos = {-sinNext * kInnerRadius, -cosNext * kInnerRadius, 0.0f};
+		vertices[(size_t)vertexIndex + 3].normal = {0.0f, 0.0f, 1.0f};
+		vertices[(size_t)vertexIndex + 3].uv = {uNext, 1.0f};
+
+		// インデックス
+		indices[(size_t)indexIndex + 0] = vertexIndex + 0;
+		indices[(size_t)indexIndex + 1] = vertexIndex + 1;
+		indices[(size_t)indexIndex + 2] = vertexIndex + 2;
+		indices[(size_t)indexIndex + 3] = vertexIndex + 2;
+		indices[(size_t)indexIndex + 4] = vertexIndex + 1;
+		indices[(size_t)indexIndex + 5] = vertexIndex + 3;
 	}
-
-	// インデックス
-	indeces[0] = 0;
-	indeces[1] = 1;
-	indeces[2] = 2;
-
-	indeces[3] = 2;
-	indeces[4] = 1;
-	indeces[5] = 3;
-
-	instance->InitializeFromVertices(vertices, indeces);
+	instance->InitializeFromVertices(vertices, indices);
 
 	return instance;
 }
