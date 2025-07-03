@@ -187,7 +187,7 @@ Model2* Model2::CreateRing() {
 	std::vector<uint32_t> indices;
 
 	const uint32_t kRingDivide = 32;
-	const float kOuterRadius = 10.0f;
+	const float kOuterRadius = 13.0f;
 	const float kInnerRadius = 4.0f;
 	const float ridianPerDivide = 2.0f * std::numbers::pi_v<float> / float(kRingDivide);
 
@@ -211,19 +211,19 @@ Model2* Model2::CreateRing() {
 		// positionとuv。normalは必要なら+zを設定する
 		// 左下
 		vertices[(size_t)vertexIndex + 0].pos = {-sin * kOuterRadius, -cos * kOuterRadius, 0.0f};
-		vertices[(size_t)vertexIndex + 0].normal = {0.0f, 0.0f, 1.0f};
+		vertices[(size_t)vertexIndex + 0].normal = {0.0f, 0.0f, -1.0f};
 		vertices[(size_t)vertexIndex + 0].uv = {u, 0.0f};
 		// 左上
 		vertices[(size_t)vertexIndex + 1].pos = {-sinNext * kOuterRadius, -cosNext * kOuterRadius, 0.0f};
-		vertices[(size_t)vertexIndex + 1].normal = {0.0f, 0.0f, 1.0f};
+		vertices[(size_t)vertexIndex + 1].normal = {0.0f, 0.0f, -1.0f};
 		vertices[(size_t)vertexIndex + 1].uv = {uNext, 0.0f};
 		// 右下
 		vertices[(size_t)vertexIndex + 2].pos = {-sin * kInnerRadius, -cos * kInnerRadius, 0.0f};
-		vertices[(size_t)vertexIndex + 2].normal = {0.0f, 0.0f, 1.0f};
+		vertices[(size_t)vertexIndex + 2].normal = {0.0f, 0.0f, -1.0f};
 		vertices[(size_t)vertexIndex + 2].uv = {u, 1.0f};
 		// 右上
 		vertices[(size_t)vertexIndex + 3].pos = {-sinNext * kInnerRadius, -cosNext * kInnerRadius, 0.0f};
-		vertices[(size_t)vertexIndex + 3].normal = {0.0f, 0.0f, 1.0f};
+		vertices[(size_t)vertexIndex + 3].normal = {0.0f, 0.0f, -1.0f};
 		vertices[(size_t)vertexIndex + 3].uv = {uNext, 1.0f};
 
 		// インデックス
