@@ -1,10 +1,12 @@
 #pragma once
 #include "KamataEngine.h"
-#include "Model2/Model2.h"
 
 class GameScene {
 
 public:
+
+	GameScene();
+
 	~GameScene();
 
 	// 初期化
@@ -17,16 +19,11 @@ public:
 	void Draw();
 
 private:
-	KamataEngine::DirectXCommon* dxCommon_ = nullptr;
-	KamataEngine::Input* input_ = nullptr;
-	KamataEngine::Audio* audio_ = nullptr;
 
-	// モデル
-	KamataEngine::Model2* model_ = nullptr;
-	uint32_t textureHandle_;
+	// テクスチャハンドル
+	uint32_t textureHandle_ = 0;
 
-	std::vector<KamataEngine::WorldTransform*> worldTransforms_;
+	// スプライト
+	KamataEngine::Sprite* sprite_ = nullptr;
 
-	// カメラ
-	KamataEngine::Camera* camera_;
 };
