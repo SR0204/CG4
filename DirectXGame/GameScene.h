@@ -4,7 +4,6 @@
 class GameScene {
 
 public:
-
 	GameScene();
 
 	~GameScene();
@@ -19,11 +18,12 @@ public:
 	void Draw();
 
 private:
-
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
 
 	// スプライト
 	KamataEngine::Sprite* sprite_ = nullptr;
 
+	// メンバー変数に追加
+	int frameCount = 0;
 };
