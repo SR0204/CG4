@@ -46,7 +46,7 @@ void GameScene::Update() {
 void GameScene::Draw() {
 	// DirectXCommonインスタンスの取得
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
-	// スプライト描画前処理
+	// スプライト描画前処理(背景)
 	Sprite::PreDraw(dxCommon->GetCommandList());
 
 	if (isBackgroundStarted_) {
@@ -57,6 +57,20 @@ void GameScene::Draw() {
 		sprite_->Draw();
 	}
 
-	// スプライト描画後処理
+	// スプライト描画後処理(背景)
+	Sprite::PostDraw();
+
+	// 深度バッファクリア
+	dxCommon->ClearDepthBuffer();
+	// 3Dモデル描画前処理
+	Model::PreDraw(dxCommon->GetCommandList());
+
+	// 3Dモデル描画後処理
+	Model::PostDraw();
+
+	// スプライト描画前処理(2D近景)
+	Sprite::PreDraw(dxCommon->GetCommandList());
+
+	// スプライト描画後処理(背景)
 	Sprite::PostDraw();
 }
