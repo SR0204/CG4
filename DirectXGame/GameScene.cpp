@@ -1,5 +1,5 @@
 #include "GameScene.h"
-#include <cmath> // sin関数に必要
+#include <cmath>
 using namespace KamataEngine;
 
 GameScene::GameScene() {}
