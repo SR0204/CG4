@@ -1,12 +1,14 @@
 #pragma once
-#include "KamataEngine.h"
+#include<KamataEngine.h>
 
-class GameScene {
+
+class Stage {
 
 public:
-	GameScene();
 
-	~GameScene();
+	Stage();
+
+	~Stage();
 
 	// 初期化
 	void Initialize();
@@ -18,5 +20,4 @@ public:
 	void Draw();
 
 private:
-	
 };
