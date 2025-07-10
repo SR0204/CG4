@@ -8,9 +8,15 @@ GameScene::~GameScene() {
 	// デストラクタ
 	delete sprite_;
 	delete Stagesprite_;
+	delete player_;
+	delete camera_;
 }
 
 void GameScene::Initialize() {
+
+	// カメラ生成・初期化
+	camera_ = new Camera();
+	camera_->Initialize();
 
 	// ファイル名を指定してテクスチャを読み込む
 	textureHandle_ = TextureManager::Load("./Resources/Title/Title.png");
@@ -20,9 +26,15 @@ void GameScene::Initialize() {
 
 	Stagesprite_ = new Stage();
 	Stagesprite_->Initialize();
+
+	modelPlayer_ = Model::CreateFromOBJ("player", true);
+	player_ = new Player();
+	player_->Initialize(modelPlayer_, camera_, {0, 0, 0});
 }
 
 void GameScene::Update() {
+
+	player_->Update();
 
 	frameCount++;
 
@@ -64,6 +76,8 @@ void GameScene::Draw() {
 	dxCommon->ClearDepthBuffer();
 	// 3Dモデル描画前処理
 	Model::PreDraw(dxCommon->GetCommandList());
+
+	player_->Draw();
 
 	// 3Dモデル描画後処理
 	Model::PostDraw();

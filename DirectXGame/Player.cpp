@@ -1,11 +1,50 @@
 #include "Player.h"
+#include <input/Input.h>
+
+using namespace KamataEngine;
 
 Player::Player() {}
 
 Player::~Player() {}
 
-void Player::Initialize() {}
+void Player::Initialize(KamataEngine::Model* model, KamataEngine::Camera* camera, const Vector3& position) {
 
-void Player::Uodate() {}
+	// Nullポインタチェック
+	assert(model);
 
-void Player::Draw() {}
+	// 引数として受け取ったデータをメンバ変数に記録する
+	model_ = model;
+	camera_ = camera;
+
+	// ワールド変換の初期化
+	worldTransform_.Initialize();
+	worldTransform_.translation_ = position; // 初期配置
+}
+
+void Player::Update() {
+
+	const float speed = 1.0f;
+
+	// 入力取得
+	Input* input = Input::GetInstance();
+
+	if (input->PushKey(DIK_W)) {
+		worldTransform_.translation_.y += speed;
+	}
+	if (input->PushKey(DIK_S)) {
+		worldTransform_.translation_.y -= speed;
+	}
+	if (input->PushKey(DIK_A)) {
+		worldTransform_.translation_.x -= speed;
+	}
+	if (input->PushKey(DIK_D)) {
+		worldTransform_.translation_.x += speed;
+	}
+
+	worldTransform_.scale_ = {5.0f, 5.0f, 5.0f};
+
+	// ワールド変換を更新
+	worldTransform_.UpdateMatrix();
+}
+
+void Player::Draw() { model_->Draw(worldTransform_, *camera_); }
