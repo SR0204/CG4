@@ -1,23 +1,21 @@
 #pragma once
-#include<KamataEngine.h>
-
+#include "KamataEngine.h"
 
 class Stage {
-
 public:
-
 	Stage();
-
 	~Stage();
 
-	// 初期化
 	void Initialize();
-
-	// 更新
 	void Update();
-
-	// 描画
 	void Draw();
 
 private:
+	uint32_t textureHandle_;
+	KamataEngine::Sprite* sprite1_;
+	KamataEngine::Sprite* sprite2_;
+
+	float scrollX_ = 0.0f;
+	float scrollSpeed_ = 2.0f;
+	float bgWidth_ = 1280;
 };

@@ -5,17 +5,42 @@ using namespace KamataEngine;
 GameScene::GameScene() {}
 
 GameScene::~GameScene() {
-	
+	// デストラクタ
+	delete sprite_;
+	delete Stagesprite_;
 }
 
 void GameScene::Initialize() {
 
-	
+	// ファイル名を指定してテクスチャを読み込む
+	textureHandle_ = TextureManager::Load("./Resources/Title/Title.png");
+
+	// スプライトインスタンスの生成
+	sprite_ = Sprite::Create(textureHandle_, {0, 0});
+
+	Stagesprite_ = new Stage();
+	Stagesprite_->Initialize();
 }
 
 void GameScene::Update() {
 
-	
+	frameCount++;
+
+	if (isTitle) {
+		if (isTitle && Input::GetInstance()->TriggerKey(DIK_RETURN)) {
+			isTitle = false;
+
+			isBackgroundStarted_ = true;
+		}
+		// sin波で上下に揺れるY座標を作る（±10ピクセル範囲で動かす）
+		float y = 10 * sin(frameCount * 0.05f);
+		// スプライトの位置を更新
+		sprite_->SetPosition({0.0f, y});
+	}
+
+	if (isBackgroundStarted_) {
+		Stagesprite_->Update();
+	}
 }
 
 void GameScene::Draw() {
@@ -24,6 +49,13 @@ void GameScene::Draw() {
 	// スプライト描画前処理
 	Sprite::PreDraw(dxCommon->GetCommandList());
 
+	if (isBackgroundStarted_) {
+		Stagesprite_->Draw();
+	}
+	// スプライトインスタンスの描画処理
+	if (isTitle && frameCount % 150 >= 30) {
+		sprite_->Draw();
+	}
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
