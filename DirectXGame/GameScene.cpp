@@ -36,7 +36,7 @@ void GameScene::Draw() {
 	Sprite::PreDraw(dxCommon->GetCommandList());
 
 	// スプライトインスタンスの描画処理
-	if (frameCount % 60 >= 30) {
+	if (frameCount % 150 >= 30) {
 		sprite_->Draw();
 	}
 
