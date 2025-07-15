@@ -7,15 +7,20 @@ GameScene::GameScene() {}
 GameScene::~GameScene() {
 	// デストラクタ
 	delete sprite_;
+	delete sprite2_;
 }
 
 void GameScene::Initialize() {
 
 	// ファイル名を指定してテクスチャを読み込む
-	textureHandle_ = TextureManager::Load("./Resources/Title/Title.png");
+	textureHandle_ = TextureManager::Load("./Resources/Title/TitleKey.png");
+
+	textureHandle2_ = TextureManager::Load("./Resources/Title/Title.png");
 
 	// スプライトインスタンスの生成
 	sprite_ = Sprite::Create(textureHandle_, {0, 0});
+
+	sprite2_ = Sprite::Create(textureHandle2_, {0, 0});
 }
 
 void GameScene::Update() {
@@ -27,6 +32,22 @@ void GameScene::Update() {
 
 	// スプライトの位置を更新
 	sprite_->SetPosition({0.0f, y});
+
+	// sprite2_ の移動処理（上から下へ）
+	Vector2 position = sprite2_->GetPosition();
+
+	const float targetY = 100.0f;
+	const float speed = 1.0f;
+
+	if (position.y < targetY) {
+		position.y += speed;
+
+		if (position.y > targetY) {
+			position.y = targetY;
+		}
+	}
+
+	sprite2_->SetPosition(position);
 }
 
 void GameScene::Draw() {
@@ -39,6 +60,8 @@ void GameScene::Draw() {
 	if (frameCount % 150 >= 30) {
 		sprite_->Draw();
 	}
+
+	sprite2_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
