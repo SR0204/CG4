@@ -14,7 +14,7 @@ GameScene::~GameScene() {
 void GameScene::Initialize() {
 
 	// ファイル名を指定してテクスチャを読み込む
-	textureHandle_ = TextureManager::Load("./Resources/Title/Title.png");
+	textureHandle_ = TextureManager::Load("./Resources/Title/TitleKey.png");
 
 	textureHandle2_ = TextureManager::Load("./Resources/Title/Title.png");
 
@@ -42,7 +42,6 @@ void GameScene::Update() {
 		// スプライトの位置を更新
 		sprite_->SetPosition({0.0f, y});
 	}
-
 	// sprite2_ の移動処理（上から下へ）
 	Vector2 position = sprite2_->GetPosition();
 
@@ -58,7 +57,6 @@ void GameScene::Update() {
 	}
 
 	sprite2_->SetPosition(position);
-
 	if (isBackgroundStarted_) {
 		Stagesprite_->Update();
 	}
@@ -77,8 +75,9 @@ void GameScene::Draw() {
 	if (isTitle && frameCount % 150 >= 30) {
 		sprite_->Draw();
 	}
-
-	sprite2_->Draw();
+	if (isTitle) {
+		sprite2_->Draw();
+	}
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
