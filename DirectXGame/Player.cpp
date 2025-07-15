@@ -42,7 +42,7 @@ void Player::Update() {
 	}
 
 	worldTransform_.scale_ = {5.0f, 5.0f, 5.0f};
-
+	worldTransform_.rotation_ = {0, 90, 0};
 	// ワールド変換を更新
 	worldTransform_.UpdateMatrix();
 }
