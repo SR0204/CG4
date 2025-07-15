@@ -35,7 +35,6 @@ void GameScene::Initialize() {
 	modelPlayer_ = Model::CreateFromOBJ("player", true);
 	player_ = new Player();
 	player_->Initialize(modelPlayer_, camera_, {0, 0, 0});
-
 }
 
 void GameScene::Update() {
@@ -100,7 +99,9 @@ void GameScene::Draw() {
 	// 3Dモデル描画前処理
 	Model::PreDraw(dxCommon->GetCommandList());
 
-	player_->Draw();
+	if (isBackgroundStarted_) {
+		player_->Draw();
+	}
 
 	// 3Dモデル描画後処理
 	Model::PostDraw();
