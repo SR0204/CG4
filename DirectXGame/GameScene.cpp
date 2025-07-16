@@ -36,7 +36,7 @@ void GameScene::Initialize() {
 	player_ = new Player();
 	player_->Initialize(modelPlayer_, camera_, {0, 0, 0});
 
-	
+	gauge_ = new Gauge();
 	gauge_->Initialize();
 	
 }

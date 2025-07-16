@@ -16,11 +16,15 @@ public:
 	void Draw();
 
 private:
-	KamataEngine::Sprite* hpBack_ = nullptr;    // 背景（グレー）
-	KamataEngine::Sprite* hpOld_ = nullptr;     // 緑：ディレイHP
-	KamataEngine::Sprite* hpCurrent_ = nullptr; // 赤：現在HP
-	float hpRate_ = 1.0f;                       // 現在のHP割合
-	float hpOldRate_ = 1.0f;                    // ディレイ表示用のHP割合
+	std::vector<KamataEngine::Sprite*> GaugeSprite_;
 
 	uint32_t textureHandle_;
+
+	int red = 0;
+	int Green = 1;
+
+	const int maxHP = 2;
+	const KamataEngine::Vector2 startPos = {50, 50}; // 左上の開始位置
+	const KamataEngine::Vector2 size = {100, 20};     // 各ゲージのサイズ
+
 };

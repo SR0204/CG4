@@ -9,30 +9,38 @@ Gauge::~Gauge() {}
 void Gauge::Initialize() {
 	textureHandle_ = TextureManager::Load("./Resources/white1x1.png");
 
-	Vector2 barPos = {50, 50};
-	Vector2 barSize = {200, 20};
+	for (int i = 0; i < maxHP; ++i) {
 
-	// 赤バー（現在HPのみ）
-	hpCurrent_ = Sprite::Create(textureHandle_, barPos);
-	hpCurrent_->SetSize(barSize); // 初期サイズは最大
-	hpCurrent_->SetColor({255, 0, 0, 255});
-	hpCurrent_->SetAnchorPoint({0, 0});
+		// 本体ゲージ（色つき）
+		auto gauge = KamataEngine::Sprite::Create(textureHandle_, startPos);
+		gauge->SetSize(size);
 
-	hpRate_ = 1.0f; // 初期HP100%
+		if (i == red) {
+			gauge->SetColor(Vector4(1.0f, 0.0f, 0.0f, 1.0f)); // 赤で表示
+		} else if (i == Green) {
+			gauge->SetColor({0.24f, 0.70f, 0.44f, 1.0f}); // ミドリで表示
+		}
+		GaugeSprite_.push_back(gauge);
+	}
 }
 
 void Gauge::Update() {
-	// テスト用：HPを徐々に減らす
-	hpRate_ -= 0.001f;
-	if (hpRate_ < 0.0f)
-		hpRate_ = 0.0f;
 
-	float fullWidth = 200.0f;
-	hpCurrent_->SetSize({fullWidth * hpRate_, 20});
+	for (int i = 0; i < GaugeSprite_.size(); ++i) {
+
+		if (i == Green) {
+			GaugeSprite_[i]->SetSize(Vector2(GaugeSprite_[i]->GetSize().x - 1, GaugeSprite_[i]->GetSize().y));
+			if (GaugeSprite_[i]->GetSize().x < 0) {
+				GaugeSprite_[i]->SetSize(size);
+			}
+		}
+	}
 }
 
 void Gauge::Draw() {
-	if (hpCurrent_) {
-		hpCurrent_->Draw();
+
+	// 次に現在HPに応じたゲージを描画
+	for (int i = 0; i < maxHP; i++) {
+		GaugeSprite_[i]->Draw();
 	}
 }
