@@ -38,6 +38,9 @@ void GameScene::Initialize() {
 
 	gauge_ = new Gauge();
 	gauge_->Initialize();
+
+	number_ = new Number();
+	number_->Initialize();
 	
 }
 
@@ -79,6 +82,7 @@ void GameScene::Update() {
 
 	gauge_->Update();
 	
+	number_->Update();
 }
 
 void GameScene::Draw() {
@@ -118,6 +122,7 @@ void GameScene::Draw() {
 
 	if (isBackgroundStarted_) {
 		gauge_->Draw();
+		number_->Draw();
 	}
 
 	// スプライト描画後処理(背景)

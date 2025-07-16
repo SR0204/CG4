@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "Stage.h"
 #include"Gauge.h"
+#include"Number.h"
+
 
 class GameScene {
 
@@ -50,4 +52,6 @@ private:
 	KamataEngine::Camera* camera_;
 
 	Gauge* gauge_ = nullptr;
+
+	Number* number_ = nullptr;
 };
