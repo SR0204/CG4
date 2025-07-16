@@ -107,6 +107,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="Gauge.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtilityforText.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -190,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Gauge.h" />
     <ClInclude Include="MathUtilityforText.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Stage.h" />

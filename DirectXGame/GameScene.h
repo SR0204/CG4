@@ -2,6 +2,7 @@
 #include "KamataEngine.h"
 #include "Player.h"
 #include "Stage.h"
+#include"Gauge.h"
 
 class GameScene {
 
@@ -20,7 +21,6 @@ public:
 	void Draw();
 
 private:
-
 	KamataEngine::WorldTransform* worldTransform_;
 
 	// テクスチャハンドル
@@ -48,4 +48,6 @@ private:
 
 	// ビュープロジェクション生成
 	KamataEngine::Camera* camera_;
+
+	Gauge* gauge_ = nullptr;
 };

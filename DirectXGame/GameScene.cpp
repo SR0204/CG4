@@ -35,11 +35,13 @@ void GameScene::Initialize() {
 	modelPlayer_ = Model::CreateFromOBJ("player", true);
 	player_ = new Player();
 	player_->Initialize(modelPlayer_, camera_, {0, 0, 0});
+
+	
+	gauge_->Initialize();
+	
 }
 
 void GameScene::Update() {
-
-	
 
 	player_->Update();
 
@@ -74,6 +76,9 @@ void GameScene::Update() {
 	if (isBackgroundStarted_) {
 		Stagesprite_->Update();
 	}
+
+	gauge_->Update();
+	
 }
 
 void GameScene::Draw() {
@@ -110,6 +115,10 @@ void GameScene::Draw() {
 
 	// スプライト描画前処理(2D近景)
 	Sprite::PreDraw(dxCommon->GetCommandList());
+
+	if (isBackgroundStarted_) {
+		gauge_->Draw();
+	}
 
 	// スプライト描画後処理(背景)
 	Sprite::PostDraw();
