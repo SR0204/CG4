@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <input/Input.h>
+#include <cassert>
 
 using namespace KamataEngine;
 
